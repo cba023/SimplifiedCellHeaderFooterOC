@@ -10,9 +10,9 @@
 
 @implementation UITableView (ReuseView)
 
-- (__kindof UITableViewCell *)cellWithClass:(Class)class fileType:(FileType)fileType {
+- (id)cellWithClass:(Class)class fileType:(FileType)fileType {
     NSString *classString = [self getClassNameWithClass:class];
-    __kindof UITableViewCell * cell = [self dequeueReusableCellWithIdentifier:classString];
+    id cell = [self dequeueReusableCellWithIdentifier:classString];
     if (!cell) {
         switch (fileType) {
             case FileTypeNib:
@@ -29,7 +29,7 @@
 }
 
 /** 根据xib创建header或footer */
-- (UIView *)headerFooterFromNib:(Class)nibClass {
+- (id)headerFooterFromNib:(Class)nibClass {
     NSString *classString = [self getClassNameWithClass:nibClass];
     UIView *headerFooter = [self dequeueReusableHeaderFooterViewWithIdentifier:classString];
     if (!headerFooter) {
@@ -39,7 +39,7 @@
 }
 
 /** 通过类注册创建header或footer */
-- (UIView *)headerFooterFromClass:(Class)aClass {
+- (id)headerFooterFromClass:(Class)aClass {
     NSString *classString = [self getClassNameWithClass:aClass];
     UIView *headerFooter = [self dequeueReusableHeaderFooterViewWithIdentifier:classString];
     if (!headerFooter) {
